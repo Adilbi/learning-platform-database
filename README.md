@@ -1,2 +1,38 @@
-# learning-platform-database
-Relational database schema and analytical SQL queries for an educational platform (PostgreSQL).
+# 🎓 Educational Platform Database (PostgreSQL)
+
+Реляционная база данных из 13 таблиц для управления образовательным центром (курсы, студенты, группы, оплаты, успеваемость и сертификация).
+
+## 🛠 Технологии
+- **СУБД:** PostgreSQL 16
+- **Инструменты:** pgAdmin 4 (ERD Tool)
+- **Язык:** SQL (DDL, DML, DQL)
+
+---
+
+## 📐 Архитектура базы данных (ER-Диаграмма)
+
+![ERD Schema](database_schema.png)
+
+### Основные модули системы:
+1. **Пользователи и группы:** `students`, `teachers`, `groups`, `group_students`
+2. **Учебный процесс:** `courses`, `lessons`, `homeworks`, `homework_submissions`, `lesson_materials`
+3. **Аналитика успеваемости:** `attendance`, `student_progress`, `certificates`
+4. **Финансы:** `payments`
+
+---
+
+## 📁 Структура проекта
+- `schema.sql` — DDL-скрипт создания таблиц с первичными/внешними ключами и ограничениями.
+- `seed.sql` — DML-скрипт заполнения тестовыми данными.
+- `queries.sql` — 5 аналитических SQL-запросов (`JOIN`, `GROUP BY`, `HAVING`, `COALESCE`).
+- `database_schema.png` — визуальная ER-диаграмма связей.
+
+---
+
+## 📊 Аналитические SQL-запросы (`queries.sql`)
+
+1. **Студенты и их курсы:** Связывание таблиц через `JOIN` для получения полного состава групп.
+2. **Задолженности по оплате:** Расчет суммы долга каждого студента с помощью `COALESCE` и `HAVING`.
+3. **Успеваемость:** Подсчет средних оценок за ДЗ и прогресса прохождения курса (`AVG`, `ROUND`).
+4. **Посещаемость:** Процентное соотношение присутствия студентов на занятиях (`CASE WHEN`, `NULLIF`).
+5. **Контроль сдачи ДЗ:** Нахождение студентов с долгами по домашним заданиям (`LEFT JOIN ... WHERE NULL`).
